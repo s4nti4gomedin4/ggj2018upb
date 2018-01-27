@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
-
+    public int startLevel;
     public Text m_TextLeve;
     public int m_Level { 
         get { return _m_Level; }
@@ -19,7 +19,7 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        OnLevelChange();
+        m_Level = startLevel;
 	}
 	
     private void OnLevelChange()

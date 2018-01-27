@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 
     public float speed;
+    public float tilt;
     private Rigidbody m_rb;
 	// Use this for initialization
 	void Start () {
@@ -16,9 +17,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         var horizontal = Input.GetAxis("Horizontal");
         var vertical = Input.GetAxis("Vertical");
-        var position = m_rb.position;
-        position.x += horizontal * speed ;
-        position.z += vertical * speed ;
-        m_rb.position = position;
+        Vector3 movement = new Vector3(horizontal, 0.0f, vertical);
+        m_rb.velocity = movement * speed;
     }
 }

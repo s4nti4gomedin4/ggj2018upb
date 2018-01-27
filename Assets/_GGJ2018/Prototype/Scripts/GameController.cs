@@ -5,35 +5,21 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
+
     private void OnEnable()
     {
-        Infectable.onInfectableAbsorved += OnInfectableAbsorvedHandler;
+        HitBox.onHitBoxAction += OnHitBoxActionHandler;
     }
-
-
 
     private void OnDisable()
     {
-        Infectable.onInfectableAbsorved -= OnInfectableAbsorvedHandler;
+        HitBox.onHitBoxAction -= OnHitBoxActionHandler;
     }
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
-
-    private void OnInfectableAbsorvedHandler(GameObject _Infectable, GameObject _infector)
+    private void OnHitBoxActionHandler(HitBox winner, HitBox losse)
     {
-        var m_Player = _infector.GetComponent<Player>();
-        var m_Enemy = _Infectable.GetComponent<Infectable>();
-        if(m_Player!=null){
-            m_Player.m_Level +=1;
-        }
+        winner.m_Level++;
+        losse.m_Level--;
     }
 }

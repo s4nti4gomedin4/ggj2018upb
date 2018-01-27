@@ -6,10 +6,9 @@ using UnityEngine.AI;
 
 public class EnemyManager : MonoBehaviour {
 
-	private NavMeshAgent navAgent;
+	public NavMeshAgent navAgent;
     public GameObject targetLostText;
 	public GameObject targetDetectedText;
-    private GameObject m_NewtargetDetectedText;
 	bool canTargetLost = true;
 
 	//Transform target;
@@ -42,7 +41,7 @@ public class EnemyManager : MonoBehaviour {
 		range,
 		radar
 	};
-
+    public enemyAction _m_ActualEnemyAction;
 	private enemyAction m_ActualEnemyAction{
 		get{return _m_ActualEnemyAction; }
 		set{_m_ActualEnemyAction = value; StateChange (); }
@@ -51,13 +50,12 @@ public class EnemyManager : MonoBehaviour {
 
 	public enemyType actualEnemyType;
 
-	public enemyAction _m_ActualEnemyAction;
+	
 
 	public Transform[] patrolPos;
 
 	// Use this for initialization
 	void Start () {
-		navAgent = GetComponent<NavMeshAgent> ();
 		lastPatrolPos = transform.position;
         m_FollowPlayer.onPlayerDetected += OnPlayerDetectedHandler;
         m_FollowPlayer.onPlayerLost += OnPlayerLostHandler;
@@ -77,7 +75,7 @@ public class EnemyManager : MonoBehaviour {
     }
     private void OnPlayerLostHandler(Vector3 position)
     {
-        if (m_ActualEnemyAction == enemyAction.patrol || m_ActualEnemyAction == enemyAction.follow)
+        if ( m_ActualEnemyAction == enemyAction.follow)
         {
             m_TargetPosition = position;
             m_ActualEnemyAction = enemyAction.targetLost;
@@ -87,7 +85,7 @@ public class EnemyManager : MonoBehaviour {
 
     private void OnPlayerDetectedHandler(Vector3 position)
     {
-        if ( m_ActualEnemyAction == enemyAction.follow)
+        if (m_ActualEnemyAction == enemyAction.patrol || m_ActualEnemyAction == enemyAction.follow)
         {
             m_TargetPosition = position;
             m_ActualEnemyAction = enemyAction.follow;
@@ -161,6 +159,8 @@ public class EnemyManager : MonoBehaviour {
 
 	void Patroling()
 	{
+        targetLostText.SetActive(false);
+        targetDetectedText.SetActive(false);
 		int r = Random.Range(0,patrolPos.Length);
 		actualPatrolPos = patrolPos [r].position;
 		if (lastPatrolPos != actualPatrolPos) {
@@ -174,16 +174,15 @@ public class EnemyManager : MonoBehaviour {
 	{
 		if (canTargetLost) {
 			canTargetLost = false;
-			GameObject tlt = Instantiate (targetLostText, gameObject.transform.position, Quaternion.identity) as GameObject;
-			tlt.transform.SetParent (this.gameObject.transform);
 			Invoke ("WaitForCanTargetLost", 2);
 		}
-        Destroy(m_NewtargetDetectedText,0.01f);
+        targetLostText.SetActive(true);
+        targetDetectedText.SetActive(false);
 	}
     void DetectedTarget()
     {
-        m_NewtargetDetectedText = Instantiate(targetDetectedText, gameObject.transform.position, Quaternion.identity) as GameObject;
-        m_NewtargetDetectedText.transform.SetParent(this.gameObject.transform);
+        targetLostText.SetActive(false);
+        targetDetectedText.SetActive(true);
     }
 
 	void WaitForCanTargetLost()

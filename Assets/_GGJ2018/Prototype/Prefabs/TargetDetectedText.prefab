@@ -21,8 +21,6 @@ GameObject:
   - component: {fileID: 4433511811865542}
   - component: {fileID: 23679856723482560}
   - component: {fileID: 102581236244600156}
-  - component: {fileID: 95077969646552896}
-  - component: {fileID: 114731973396834956}
   m_Layer: 0
   m_Name: TargetDetectedText
   m_TagString: Untagged
@@ -77,23 +75,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!95 &95077969646552896
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1176285482554458}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2ec3b393e4ff44141852bb2dfb057bfd, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!102 &102581236244600156
 TextMesh:
   serializedVersion: 3
@@ -115,14 +96,3 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
---- !u!114 &114731973396834956
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1176285482554458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f050c2ac58987c94f8714f465f946a7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
