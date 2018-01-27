@@ -15,6 +15,9 @@ public class EnemyManager : MonoBehaviour {
 	Vector3 lastPatrolPos;
  	Vector3 actualPatrolPos;
 
+    [Header("Patroll config")]
+    public float m_PositionToChangePatroll = 1;
+
 
 	public enum enemyAction
 	{
@@ -51,9 +54,15 @@ public class EnemyManager : MonoBehaviour {
 	void Start () {
 		navAgent = GetComponent<NavMeshAgent> ();
 		lastPatrolPos = transform.position;
-
+        StateChange();
 	}
 	void Update(){
+        if(m_ActualEnemyAction == enemyAction.patrol){
+            var distance = Vector3.Distance(actualPatrolPos, transform.position);
+            if(distance<m_PositionToChangePatroll){
+                Patroling();
+            }
+        }
 
 	}
 	// Update is called once per frame
@@ -92,6 +101,7 @@ public class EnemyManager : MonoBehaviour {
 
 	void OnTriggerStay(Collider col)
 	{
+        print("OnTriggerStay "+col.name);
 		if (col.gameObject.CompareTag ("Player")) {
 			//raycast
 			RaycastHit hit;
@@ -108,11 +118,13 @@ public class EnemyManager : MonoBehaviour {
 		{
 			Vector3 _mypos = transform.position;
 			float _distance = Vector3.Distance(actualPatrolPos,_mypos);
+            print("Iam on patrol point " + _distance);
 
 			if (_distance <= 1) {
 				lastPatrolPos = actualPatrolPos;
 				Patroling ();
 			}
+
 		}
 	}
 
