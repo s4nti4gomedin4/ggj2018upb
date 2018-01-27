@@ -28,7 +28,7 @@ public class RadarTowerManager : MonoBehaviour {
 				if (hit.collider.CompareTag ("Player")) {
 					lastTargetPos = col.gameObject.transform.position;
 					for (int i = 0; i < allies.Length; i++) {
-						allies [i].GetComponent<EnemyManager> ().lastTargetPos = lastTargetPos;
+						allies [i].GetComponent<EnemyManager> ().m_TargetPosition = lastTargetPos;
 						allies [i].GetComponent<EnemyManager> ()._m_ActualEnemyAction = EnemyManager.enemyAction.follow;
 						allies [i].GetComponent<EnemyManager> ().StateChange ();
 					}
@@ -41,7 +41,7 @@ public class RadarTowerManager : MonoBehaviour {
 	{
 		for (int i = 0; i < allies.Length; i++) {
 			if (allies [i].GetComponent<EnemyManager> ()._m_ActualEnemyAction == EnemyManager.enemyAction.follow) {
-				allies [i].GetComponent<EnemyManager> ().lastTargetPos = lastTargetPos;
+				allies [i].GetComponent<EnemyManager> ().m_TargetPosition = lastTargetPos;
 				allies [i].GetComponent<EnemyManager> ()._m_ActualEnemyAction = EnemyManager.enemyAction.targetLost;
 				allies [i].GetComponent<EnemyManager> ().StateChange ();
 			}

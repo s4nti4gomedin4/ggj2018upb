@@ -13,7 +13,7 @@ public class EnemyManager : MonoBehaviour {
 	bool canTargetLost = true;
 
 	//Transform target;
-	private Vector3 m_TargetPosition;
+	public Vector3 m_TargetPosition;
 
 
 	Vector3 lastPatrolPos;
@@ -96,7 +96,7 @@ public class EnemyManager : MonoBehaviour {
 
 
 	// Update is called once per frame
-	void StateChange () 
+	public void StateChange () 
 	{
 		if (actualEnemyType == enemyType.melee || actualEnemyType == enemyType.range) {
 			if (m_ActualEnemyAction == enemyAction.stand) {
