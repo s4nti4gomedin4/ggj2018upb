@@ -24,15 +24,17 @@ public class Infectable : MonoBehaviour {
             var m_player = other.GetComponent<Player>();
             if (m_player != null)
             {
-                m_TimeEating += Time.deltaTime;
-                if (m_TimeEating > m_timeToEat)
-                {
-
-                    if (onInfectableDestroy != null)
+                if (m_player.m_Level <= m_Level) { 
+                    m_TimeEating += Time.deltaTime;
+                    if (m_TimeEating > m_timeToEat)
                     {
-                        onInfectableDestroy(this.gameObject, other.gameObject);
+
+                        if (onInfectableDestroy != null)
+                        {
+                            onInfectableDestroy(this.gameObject, other.gameObject);
+                        }
+                        Destroy(this.gameObject);
                     }
-                    Destroy(this.gameObject);
                 }
             }
         }
