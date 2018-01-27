@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,10 +7,13 @@ using UnityEngine.AI;
 public class EnemyManager : MonoBehaviour {
 
 	private NavMeshAgent navAgent;
-	public GameObject targetLostText;
+    public GameObject targetLostText;
+	public GameObject targetDetectedText;
+    private GameObject m_NewtargetDetectedText;
 	bool canTargetLost = true;
+
 	//Transform target;
-	Vector3 lastTargetPos;
+	private Vector3 m_TargetPosition;
 
 
 	Vector3 lastPatrolPos;
@@ -17,6 +21,7 @@ public class EnemyManager : MonoBehaviour {
 
     [Header("Patroll config")]
     public float m_PositionToChangePatroll = 1;
+    public FollowPlayer m_FollowPlayer;
 
 
 	public enum enemyAction
@@ -54,40 +59,67 @@ public class EnemyManager : MonoBehaviour {
 	void Start () {
 		navAgent = GetComponent<NavMeshAgent> ();
 		lastPatrolPos = transform.position;
-        StateChange();
+        m_FollowPlayer.onPlayerDetected += OnPlayerDetectedHandler;
+        m_FollowPlayer.onPlayerLost += OnPlayerLostHandler;
+        m_ActualEnemyAction = enemyAction.patrol;
 	}
-	void Update(){
-        if(m_ActualEnemyAction == enemyAction.patrol){
+    void Update()
+    {
+        if (m_ActualEnemyAction == enemyAction.patrol)
+        {
             var distance = Vector3.Distance(actualPatrolPos, transform.position);
-            if(distance<m_PositionToChangePatroll){
+            if (distance < m_PositionToChangePatroll)
+            {
                 Patroling();
             }
         }
 
-	}
+    }
+    private void OnPlayerLostHandler(Vector3 position)
+    {
+        if (m_ActualEnemyAction == enemyAction.patrol || m_ActualEnemyAction == enemyAction.follow)
+        {
+            m_TargetPosition = position;
+            m_ActualEnemyAction = enemyAction.targetLost;
+        }
+    }
+
+
+    private void OnPlayerDetectedHandler(Vector3 position)
+    {
+        if ( m_ActualEnemyAction == enemyAction.follow)
+        {
+            m_TargetPosition = position;
+            m_ActualEnemyAction = enemyAction.follow;
+        }
+    }
+
+
 	// Update is called once per frame
 	void StateChange () 
 	{
 		if (actualEnemyType == enemyType.melee || actualEnemyType == enemyType.range) {
 			if (m_ActualEnemyAction == enemyAction.stand) {
 				//nothing or something
-				//navAgent.SetDestination(navAgent.transform.position);
-				navAgent.SetDestination(lastTargetPos);
+				navAgent.SetDestination(m_TargetPosition);
 			} else if (m_ActualEnemyAction == enemyAction.patrol) {
 				//patrol
 				Patroling();
 			}else if (m_ActualEnemyAction == enemyAction.follow) {
 				// follow target
+                DetectedTarget();
 				CancelInvoke("WaitForPatrol");
-				navAgent.SetDestination(lastTargetPos);
+				navAgent.SetDestination(m_TargetPosition);
 			}else if(m_ActualEnemyAction == enemyAction.targetLost){
-				// target Lost
-				Invoke("MissingTarget",1);
+                // target Lost
+                MissingTarget();
+				//Invoke("MissingTarget",1);
 				CancelInvoke("WaitForPatrol");
-				navAgent.SetDestination(lastTargetPos);
+				navAgent.SetDestination(m_TargetPosition);
 				Invoke ("WaitForPatrol", 4);
 			}else if (m_ActualEnemyAction == enemyAction.attack) {
-				// attack target
+                // attack target
+                print("Attack");
 			}
 		}else if(actualEnemyType == enemyType.radar)
 		{
@@ -101,20 +133,7 @@ public class EnemyManager : MonoBehaviour {
 
 	void OnTriggerStay(Collider col)
 	{
-        print("OnTriggerStay "+col.name);
-		if (col.gameObject.CompareTag ("Player")) {
-			//raycast
-			RaycastHit hit;
-			Vector3 fromPos = transform.position;
-			Vector3 toPos = col.gameObject.transform.position;
-			Vector3 direction = toPos - fromPos;
-			if (Physics.Raycast (transform.position, direction, out hit)) {
-				if (hit.collider.CompareTag ("Player")) {
-					lastTargetPos = col.gameObject.transform.position;	
-					m_ActualEnemyAction = enemyAction.follow;
-				}
-			}
-		}else if(col.gameObject.CompareTag("PatrolPos"))
+        if(col.gameObject.CompareTag("PatrolPos"))
 		{
 			Vector3 _mypos = transform.position;
 			float _distance = Vector3.Distance(actualPatrolPos,_mypos);
@@ -159,7 +178,13 @@ public class EnemyManager : MonoBehaviour {
 			tlt.transform.SetParent (this.gameObject.transform);
 			Invoke ("WaitForCanTargetLost", 2);
 		}
+        Destroy(m_NewtargetDetectedText,0.01f);
 	}
+    void DetectedTarget()
+    {
+        m_NewtargetDetectedText = Instantiate(targetDetectedText, gameObject.transform.position, Quaternion.identity) as GameObject;
+        m_NewtargetDetectedText.transform.SetParent(this.gameObject.transform);
+    }
 
 	void WaitForCanTargetLost()
 	{

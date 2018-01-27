@@ -32,6 +32,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1851592370732534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4749858692447454}
+  - component: {fileID: 114656091769068260}
+  - component: {fileID: 135313340320973240}
+  m_Layer: 0
+  m_Name: FollowPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4749858692447454
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1851592370732534}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4750278374966894}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4750278374966894
 Transform:
   m_ObjectHideFlags: 1
@@ -41,7 +71,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.41, y: 0.57, z: 5.65}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4749858692447454}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -98,9 +129,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sizeOverLevel: 0.1
-  startLevel: 1
+  startLevel: 5
   m_TimeEating: 0
   m_timeToEat: 1
+--- !u!114 &114656091769068260
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1851592370732534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e77f005b20c4c92bd0d497ff15b7be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Infectable: {fileID: 114316375648442350}
 --- !u!114 &114712197961694948
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -115,11 +158,24 @@ MonoBehaviour:
   targetLostText: {fileID: 1176285482554458, guid: f95971008dfa16845b0623b4a1baf4b4,
     type: 2}
   m_PositionToChangePatroll: 1
+  m_FollowPlayer: {fileID: 114656091769068260}
   actualEnemyType: 0
   _m_ActualEnemyAction: 1
   patrolPos:
   - {fileID: 0}
   - {fileID: 0}
+--- !u!135 &135313340320973240
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1851592370732534}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.54
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135929155504369068
 SphereCollider:
   m_ObjectHideFlags: 1

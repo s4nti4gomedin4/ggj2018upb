@@ -513,7 +513,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 764821285}
-  m_LocalRotation: {x: -0.000000029403964, y: 2.2924658e-10, z: -1, w: -0.000000032358002}
+  m_LocalRotation: {x: -0.000000029409286, y: -0, z: -1, w: -0.000000032382744}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -790,7 +790,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1425129117}
-  m_LocalRotation: {x: 0.000010087628, y: -0.404523, z: 0.91452783, w: 0.000022815944}
+  m_LocalRotation: {x: -0.404523, y: -0.00000010479648, z: 0.00000031994253, w: -0.91452783}
   m_LocalPosition: {x: 0, y: 15.070001, z: -13.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1072,6 +1072,12 @@ Prefab:
       propertyPath: patrolPos.Array.data[1]
       value: 
       objectReference: {fileID: 1489482426}
+    - target: {fileID: 114712197961694948, guid: 0969c01c696c5467ab128090b8f5793c,
+        type: 2}
+      propertyPath: targetDetectedText
+      value: 
+      objectReference: {fileID: 1176285482554458, guid: 79f7fb7ce03da4f32a50b0792416bdb9,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0969c01c696c5467ab128090b8f5793c, type: 2}
   m_IsPrefabParent: 0
@@ -1144,7 +1150,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1620177647473138, guid: 195df693e533e4df1bcd972f19fdf7ea, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 54274021455452766, guid: 195df693e533e4df1bcd972f19fdf7ea,
         type: 2}
