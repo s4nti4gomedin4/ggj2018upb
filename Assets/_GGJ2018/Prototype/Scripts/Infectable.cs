@@ -4,18 +4,38 @@ using UnityEngine;
 
 public class Infectable : MonoBehaviour {
 
-    public int m_Level;
+    public float sizeOverLevel;
+    public int startLevel=1;
+    public int m_Level { 
+        get { return _m_Level; }
+        set { _m_Level = value;
+            OnLevelChange();
+            }
+    }
+
+
+    
+    private int _m_Level;
 
     public delegate void InfectableEvent(GameObject _Infectable,GameObject _infector);
-    public static event InfectableEvent onInfectableDestroy;
+    public static event InfectableEvent onInfectableAbsorved;
 
     [SerializeField]
     private float m_TimeEating;
 
     [SerializeField]
     private float m_timeToEat;
-
-	
+ 
+	public void Start(){
+		m_Level = startLevel;
+	}
+	private void OnLevelChange(){
+    
+        var scale = transform.localScale;
+        scale.x = 1+(m_Level * sizeOverLevel);
+        scale.z = 1+(m_Level * sizeOverLevel);
+        transform.localScale = scale;
+    }
 
     public void OnTriggerStay(Collider other)
     {
@@ -29,11 +49,16 @@ public class Infectable : MonoBehaviour {
                     if (m_TimeEating > m_timeToEat)
                     {
 
-                        if (onInfectableDestroy != null)
-                        {
-                            onInfectableDestroy(this.gameObject, other.gameObject);
+                       m_Level--;
+                       m_TimeEating=0;
+						if (onInfectableAbsorved != null)
+						{
+							onInfectableAbsorved(this.gameObject, other.gameObject);
+						}
+                        if(m_Level==0){
+                            
+                            Destroy(this.gameObject,0.01f);
                         }
-                        Destroy(this.gameObject,0.01f);
                     }
                 }
             }

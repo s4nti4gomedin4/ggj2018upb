@@ -7,14 +7,14 @@ public class GameController : MonoBehaviour {
 
     private void OnEnable()
     {
-        Infectable.onInfectableDestroy += OnInfectableDestroyHandler;
+        Infectable.onInfectableAbsorved += OnInfectableAbsorvedHandler;
     }
 
 
 
     private void OnDisable()
     {
-        Infectable.onInfectableDestroy -= OnInfectableDestroyHandler;
+        Infectable.onInfectableAbsorved -= OnInfectableAbsorvedHandler;
     }
 
     // Use this for initialization
@@ -28,12 +28,12 @@ public class GameController : MonoBehaviour {
 	}
 
 
-    private void OnInfectableDestroyHandler(GameObject _Infectable, GameObject _infector)
+    private void OnInfectableAbsorvedHandler(GameObject _Infectable, GameObject _infector)
     {
         var m_Player = _infector.GetComponent<Player>();
         var m_Enemy = _Infectable.GetComponent<Infectable>();
         if(m_Player!=null){
-            m_Player.m_Level += m_Enemy.m_Level;
+            m_Player.m_Level +=1;
         }
     }
 }
