@@ -4,4 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_GGJ2018/Scenes/MainMenu.unity
+    guid: d81fff5c0f41c074a820083b73471ca4
+  - enabled: 1
+    path: Assets/_GGJ2018/Scenes/Main.unity
+    guid: b22fa94ff5fcd4d3f95d481839fad4cd
