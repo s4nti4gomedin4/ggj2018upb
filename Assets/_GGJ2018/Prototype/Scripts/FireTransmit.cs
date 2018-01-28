@@ -34,7 +34,11 @@ public class FireTransmit : MonoBehaviour {
 	}
 
 	private bool IsPositionValid(){
-		return !Physics.Raycast (new Vector3(this.transform.position.x,400,this.transform.position.z),this.transform.position);
+		RaycastHit hit;
+		var  validate=Physics.Raycast (this.transform.position, transform.up, out hit);
+		if(validate)
+		print (hit.collider.gameObject.name);
+		return validate ;
 	}
 
 }
