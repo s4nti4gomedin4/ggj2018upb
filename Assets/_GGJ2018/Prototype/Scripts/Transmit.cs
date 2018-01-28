@@ -13,71 +13,27 @@ public class Transmit : MonoBehaviour {
     private int m_Level;
    
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-
 	void OnEnable(){
 		playerObject.GetComponent<AimTransmit> ().m_AimZone.SetActive(false);
         MaxLevel = playerObject.m_hitBox.m_Level;
         m_Level = Player.MinPlayerLevel;
 		time = 0;
-        Player.onPlayerLevelChange += OnPlayerLevelChangeHandler;
-
-	}
-
-    private void OnPlayerLevelChangeHandler(int playerLevel)
-    {
-       
-        int maxLevelTEp = playerLevel + m_Level;
-        int diffMAxLevel = maxLevelTEp-MaxLevel ;
-        MaxLevel += diffMAxLevel;
-
-        if(MaxLevel<Player.MinPlayerLevel){
-            MaxLevel = Player.MinPlayerLevel;
-        }
+        StartCoroutine(CR_TransmitPlayer());
 
     }
 
-    private void OnDisable()
-    {
-        Player.onPlayerLevelChange -= OnPlayerLevelChangeHandler;
-
-    }
-
-    // Update is called once per frame
-    void Update () {
-        
-		time += Time.deltaTime;
-		if (time > timeTick) {
-            time = 0;
-           /* if (MaxLevel == Player.MinPlayerLevel)
-            {
-                TransmitPlayer();
-                return;
-            }*/
-
-             m_Level++;
+    
+    private IEnumerator CR_TransmitPlayer(){
+        yield return new WaitForSeconds(timeTick);
+        while(playerObject.m_hitBox.m_Level>Player.MinPlayerLevel){
+            m_Level++;
             OnLevelChange();
-            if(m_Level>=MaxLevel){
-                TransmitPlayer();
-                return;
-                
-            }
-            if (playerObject.m_hitBox.m_Level > Player.MinPlayerLevel + 1)
-            {
-                playerObject.m_hitBox.m_Level--;
-            }else{
-                TransmitPlayer();
-                return;
-            }
-            if (m_Level == MaxLevel){
-                TransmitPlayer();
-            }
-                    
-		}
-	}
+
+            playerObject.m_hitBox.m_Level--;
+            yield return new WaitForSeconds(timeTick);
+        }
+        TransmitPlayer();
+    }
 
 
 	private void TransmitPlayer(){

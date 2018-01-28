@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour {
     public EnemySpawn m_EnemySpawn;
     public Transform m_PlayerPosition;
     public Player m_PlayerPrefab;
+    public GameObject m_Ui;
 
     private bool m_Playing;
     private bool m_MenuStart;
@@ -44,7 +45,7 @@ public class GameController : MonoBehaviour {
     {
         m_Playing = false;
         m_MenuStart = false;
-
+        m_Ui.gameObject.SetActive(false);
         m_Splash.SetActive(false);
         m_MainMenu.SetActive(true);
     }
@@ -58,6 +59,7 @@ public class GameController : MonoBehaviour {
 
     private void OnOrgamDestroyHandler()
     {
+        m_Ui.gameObject.SetActive(false);
         m_Playing = false;
         m_Splash.SetActive(true);
         m_PlayerPrefab.gameObject.SetActive(false);
@@ -68,6 +70,7 @@ public class GameController : MonoBehaviour {
 
     private void OnPlayerDead()
     {
+        m_Ui.gameObject.SetActive(false);
         m_Playing = false;
         m_PlayerPrefab.gameObject.SetActive(false);
         m_Splash.SetActive(true);
@@ -77,6 +80,7 @@ public class GameController : MonoBehaviour {
 
     public void OnPlay()
     {
+        m_Ui.gameObject.SetActive(true);
         m_Playing = true;
         m_MainMenu.SetActive(false);
         m_Splash.SetActive(false);

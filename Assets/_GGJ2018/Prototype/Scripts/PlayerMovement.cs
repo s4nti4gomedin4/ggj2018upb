@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour {
         //m_rb.velocity = movement * speed;
         //m_rb.velocity = Vector3.zero;
         m_rb.transform.position = m_rb.transform.position + (movement*speed);
+        if(movement != Vector3.zero)
         m_player.rotation = Quaternion.LookRotation(movement);
     }
 }

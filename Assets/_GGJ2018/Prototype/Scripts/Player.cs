@@ -37,7 +37,7 @@ public class Player : MonoBehaviour {
 
 
         if (m_TextLeve != null)
-            m_TextLeve.text = string.Format("{0:D}", m_hitBox.m_Level);
+            m_TextLeve.text = string.Format("Level: {0:D}", m_hitBox.m_Level-1);
 
         var scale = transform.localScale;
         scale.x = 1+(m_hitBox.m_Level * sizeOverLevel);
