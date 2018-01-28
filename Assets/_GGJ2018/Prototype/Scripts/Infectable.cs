@@ -5,7 +5,10 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Infectable : MonoBehaviour {
-    
+
+
+    public static Action OnDeath;
+
     public float sizeOverLevel;
     public int startLevel=1;
     public HitBox m_hitBox;

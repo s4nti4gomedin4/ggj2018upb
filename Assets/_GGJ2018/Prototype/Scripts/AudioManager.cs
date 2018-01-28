@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,15 +14,50 @@ public class AudioManager : MonoBehaviour {
 	public AudioSource m_enemyDeathSound;
 	public AudioSource m_towerLaser;
 
-	// Use this for initialization
-	void Start () {
+    public HitBox m_Hitbox;
+
+    private void OnEnable()
+    {
+        PlayerMovement.onPlayerMoving += OnPlayermoveHandler;
+        PlayerMovement.onPlayerStop += OnPlayerStopHandler;
+
+    }
+
+
+
+    public void OnDisable()
+    {
+        PlayerMovement.onPlayerMoving -= OnPlayermoveHandler;
+        PlayerMovement.onPlayerStop -= OnPlayerStopHandler;
+
+
+    }
+    // Use this for initialization
+    void Start () {
+        m_Hitbox.onLevelUp += OnEating;
+	}
+
+    private void OnEating()
+    {
+        if (m_Hitbox.m_Level > 2)
+        {
+            PlayerEatingSoundPlay(false, false);
+            PlayerGrowSoundPlay(false, false);
+        }
+       
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void OnPlayermoveHandler(){
+        PlayerMoveSoundPlay(false,false);
+    }
+    private void OnPlayerStopHandler()
+    {
+        PlayerMoveSoundStop();
+    }
 	//Stop All Player Sounds
 	public void PlayerStopAllSounds()
 	{
@@ -56,27 +92,32 @@ public class AudioManager : MonoBehaviour {
 	//Player Sounds//
 
 	// Player Move Sound
-	public void PlayerMoveSoundPlay(bool loop)
+    public void PlayerMoveSoundPlay(bool loop,bool repeat)
 	{
-		PlayerStopAllSounds ();
-		m_playerMoveSound.loop = loop;
-		m_playerMoveSound.Play ();
+        PlaySound(m_playerMoveSound, loop, repeat);
 	}
 
+   
+
+    public void PlayerMoveSoundStop()
+    {
+
+        if(m_playerMoveSound.isPlaying){
+            m_playerMoveSound.Stop();
+        }
+
+    }
+
 	//Player Eating Sound
-	public void PlayerEatingSoundPlay(bool loop)
+    public void PlayerEatingSoundPlay(bool loop,bool repeat)
 	{
-		PlayerStopAllSounds ();
-		m_playerEatingSound.loop = loop;
-		m_playerEatingSound.Play ();
+        PlaySound(m_playerEatingSound,loop,repeat);
 	}
 
 	// Player Grow Sound
-	public void PlayerGrowSoundPlay(bool loop)
+    public void PlayerGrowSoundPlay(bool loop,bool repeat)
 	{
-		PlayerStopAllSounds ();
-		m_playerGrowSound.loop = loop;
-		m_playerGrowSound.Play ();
+        PlaySound(m_playerGrowSound,loop,repeat);
 	}
 
 	//Player Spit Out Sound
@@ -120,4 +161,18 @@ public class AudioManager : MonoBehaviour {
 		m_towerLaser.loop = loop;
 		m_towerLaser.Play ();
 	}
+
+    public void PlaySound(AudioSource _sound, bool loop, bool repeat)
+    {
+
+        if (_sound == null)
+        {
+            return;
+        }
+        _sound.loop = loop;
+        if (repeat)
+            _sound.Play();
+        else if (!_sound.isPlaying)
+            _sound.Play();
+    }
 }
