@@ -47,18 +47,18 @@ public class MainMenu : MonoBehaviour {
 		intros [3].SetActive (actualSlide == IntroSlides.intro3 ? true: false);
        
         if (Input.anyKeyDown || Input.GetMouseButtonDown (0)) {
-
-            if (actualSlide == IntroSlides.mainMenu)
-            {
-                actualSlide = IntroSlides.intro1;
-            }else if (actualSlide == IntroSlides.intro1) {
-				actualSlide = IntroSlides.intro2;
-			} else if (actualSlide == IntroSlides.intro2) {
-				actualSlide = IntroSlides.intro3;
-			}else if(actualSlide == IntroSlides.intro3)
-			{
-                OnIntroEndHandler();
-			}
+			OnIntroEndHandler();
+//            if (actualSlide == IntroSlides.mainMenu)
+//            {
+//                actualSlide = IntroSlides.intro1;
+//            }else if (actualSlide == IntroSlides.intro1) {
+//				actualSlide = IntroSlides.intro2;
+//			} else if (actualSlide == IntroSlides.intro2) {
+//				actualSlide = IntroSlides.intro3;
+//			}else if(actualSlide == IntroSlides.intro3)
+//			{
+//                OnIntroEndHandler();
+//			}
 		}
 	}
 
