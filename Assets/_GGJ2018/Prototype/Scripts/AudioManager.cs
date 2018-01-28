@@ -20,7 +20,9 @@ public class AudioManager : MonoBehaviour {
     {
         PlayerMovement.onPlayerMoving += OnPlayermoveHandler;
         PlayerMovement.onPlayerStop += OnPlayerStopHandler;
-
+        EnemyManager.onEnemyMove += OnEnemyMove;
+        Infectable.OnDeath += OndeathEnemy;
+        Infectable.OnLevelUp += OnLevelUpPlayer;
     }
 
 
@@ -29,14 +31,26 @@ public class AudioManager : MonoBehaviour {
     {
         PlayerMovement.onPlayerMoving -= OnPlayermoveHandler;
         PlayerMovement.onPlayerStop -= OnPlayerStopHandler;
-
-
+        EnemyManager.onEnemyMove -= OnEnemyMove;
+        Infectable.OnDeath -= OndeathEnemy;
+        Infectable.OnLevelUp -= OnLevelUpPlayer;
     }
     // Use this for initialization
     void Start () {
         m_Hitbox.onLevelUp += OnEating;
 	}
-
+    private void OnLevelUpPlayer()
+    {
+        EnemyGrowSoundPlay(false, false);
+    }
+    private void OnEnemyMove()
+    {
+        EnemyMoveSoundPlay(false, false);
+    }
+    private void OndeathEnemy()
+    {
+        EnemyDeathSoundPlay(false, false);
+    }
     private void OnEating()
     {
         if (m_Hitbox.m_Level > 2)
@@ -131,27 +145,22 @@ public class AudioManager : MonoBehaviour {
 	//Enemy Sounds
 
 	//Enemy Move Sound
-	public void EnemyMoveSoundPlay(bool loop)
+    public void EnemyMoveSoundPlay(bool loop,bool repeat)
 	{
-		EnemyStopAllSounds ();
-		m_enemyMoveSound.loop = loop;
-		m_enemyMoveSound.Play ();
+        PlaySound(m_enemyMoveSound, loop, repeat);
 	}
 
 	//Enemy Grow Sound
-	public void EnemyGrowSoundPlay(bool loop)
+	public void EnemyGrowSoundPlay(bool loop,bool repeat)
 	{
-		EnemyStopAllSounds ();
-		m_enemyGrowSound.loop = loop;
-		m_enemyGrowSound.Play ();
+		
+        PlaySound(m_enemyGrowSound,loop,repeat);
 	}
 
 	//Enemy Death Sound
-	public void EnemyDeathSoundPlay(bool loop)
+    public void EnemyDeathSoundPlay(bool loop,bool repeat)
 	{
-		EnemyStopAllSounds ();
-		m_enemyDeathSound.loop = loop;
-		m_enemyDeathSound.Play ();
+        PlaySound(m_enemyDeathSound,loop,repeat);
 	}
 
 	//Tower Laser Sound

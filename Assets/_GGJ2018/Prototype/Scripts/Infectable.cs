@@ -8,6 +8,7 @@ public class Infectable : MonoBehaviour {
 
 
     public static Action OnDeath;
+    public static Action OnLevelUp;
 
     public float sizeOverLevel;
     public int startLevel=1;
@@ -59,9 +60,18 @@ public class Infectable : MonoBehaviour {
     }
     public void Start(){
         m_hitBox.onLevelChange += OnLevelChange;
+        m_hitBox.onLevelUp += OnlevelUpHandler;
         ResetInfectable();
 		
 	}
+
+    private void OnlevelUpHandler()
+    {
+        if(OnLevelUp!=null){
+            OnLevelUp();
+        }
+    }
+
     public void ResetInfectable(){
 		navAgent.enabled = true;
         m_hitBox.m_Level = startLevel;

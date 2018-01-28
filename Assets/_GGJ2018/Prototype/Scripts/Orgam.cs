@@ -6,7 +6,7 @@ using UnityEngine;
 public class Orgam : MonoBehaviour {
 
     public static Action onOrgamDestroy;
-
+    public Tips m_tips;
     private void OnTriggerEnter(Collider other)
     {
 
@@ -15,6 +15,8 @@ public class Orgam : MonoBehaviour {
             if(m_otherHitbox!=null && m_otherHitbox.isInfected){
                 if(m_otherHitbox.m_Level == HitBox.MaxLevel){
                     DestroyOrgam();
+                }else{
+                    m_tips.ShowMessage("Need level 14 to destroy organ.");
                 }
             }
         }

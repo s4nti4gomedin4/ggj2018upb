@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour {
     public Transform m_PlayerPosition;
     public Player m_PlayerPrefab;
     public GameObject m_Ui;
+    public Tips m_Tips;
 
 	public static bool m_Playing;
     private bool m_MenuStart;
@@ -48,6 +49,7 @@ public class GameController : MonoBehaviour {
         m_Ui.gameObject.SetActive(false);
         m_Splash.SetActive(false);
         m_MainMenu.SetActive(true);
+        m_Tips.HideMessag();
     }
 
     private void Update()
@@ -90,6 +92,7 @@ public class GameController : MonoBehaviour {
         m_PlayerPrefab.transform.position = position;
         m_PlayerPrefab.gameObject.SetActive(true);
         m_PlayerPrefab.ResetPlayer();
+        m_Tips.ShowMessage("Destroy the main organ.");
     }
 
     private void OnHitBoxActionHandler(HitBox winner, HitBox losse)

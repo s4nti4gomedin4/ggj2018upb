@@ -6,6 +6,9 @@ using UnityEngine.AI;
 
 public class EnemyManager : MonoBehaviour {
 
+
+    public static System.Action onEnemyMove;
+
 	public NavMeshAgent navAgent;
     public GameObject targetLostText;
 	public GameObject targetDetectedText;
@@ -22,8 +25,17 @@ public class EnemyManager : MonoBehaviour {
     public float m_PositionToChangePatroll = 1;
     public FollowPlayer m_FollowPlayer;
 
+    private bool isVisibleOnCamera;
+    private void OnBecameVisible()
+    {
+        isVisibleOnCamera = true;
+    }
+    private void OnBecameInvisible()
+    {
+        isVisibleOnCamera = false;
+    }
 
-	public enum enemyAction
+    public enum enemyAction
 	{
 		stand,
 		patrol,
@@ -53,6 +65,7 @@ public class EnemyManager : MonoBehaviour {
 	
 
 	public Transform[] patrolPos;
+    private Vector3 m_position;
 
 	// Use this for initialization
 	void Start () {
@@ -60,6 +73,7 @@ public class EnemyManager : MonoBehaviour {
         m_FollowPlayer.onTargetDetected += OnTargetDetectedHandler;
         m_FollowPlayer.onTargetLost += OnTargeLostHandler;
         m_ActualEnemyAction = enemyAction.patrol;
+        m_position = transform.position;
 	}
     void Update()
     {
@@ -70,6 +84,11 @@ public class EnemyManager : MonoBehaviour {
             {
                 Patroling();
             }
+        }
+
+        if(isVisibleOnCamera && m_position!=transform.position) {
+            onEnemyMove();
+            m_position = transform.position;
         }
 
     }
