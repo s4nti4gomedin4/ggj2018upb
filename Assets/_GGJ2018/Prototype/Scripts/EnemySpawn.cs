@@ -80,7 +80,7 @@ public class EnemySpawn : MonoBehaviour {
         StartCoroutine(CreateNewFeed());
     }
     public IEnumerator CreateNewFeed(){
-        print("CreateNewFeed");
+       
         yield return null;
         var newFeed = Instantiate(m_FeedPrefab);
         newFeed.transform.SetParent(m_EnemyPanelSpawn);

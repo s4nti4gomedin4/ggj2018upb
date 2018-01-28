@@ -70,7 +70,6 @@ public class AudioManager : MonoBehaviour {
         }
 	}
     void PlayBackgourndMusic(){
-        print("PlayBackgourndMusic");
         PlaySound(m_Music,true,false);
     }
     void OnPlayermoveHandler(){

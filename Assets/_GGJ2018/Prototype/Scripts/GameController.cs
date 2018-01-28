@@ -19,7 +19,6 @@ public class GameController : MonoBehaviour {
     public Tips m_Tips;
 
 	public static bool m_Playing;
-    private bool m_MenuStart;
 
     private void OnEnable()
     {
@@ -30,8 +29,7 @@ public class GameController : MonoBehaviour {
     }
 
     private void OnGameStartHandler(){
-        m_MenuStart = true;
-        OnPlay();
+    //    OnPlay();
     }
 
     private void OnDisable()
@@ -47,7 +45,6 @@ public class GameController : MonoBehaviour {
     private void Start()
     {
         m_Playing = false;
-        m_MenuStart = false;
         m_Ui.gameObject.SetActive(false);
         m_Splash.SetActive(false);
         m_MainMenu.SetActive(true);
@@ -56,7 +53,9 @@ public class GameController : MonoBehaviour {
 
     private void Update()
     {
-        if(Input.anyKeyDown && !m_Playing && m_MenuStart){
+       
+        if(Input.anyKeyDown ){
+            if(!m_Playing)
             OnPlay();
         }
     }
@@ -82,8 +81,9 @@ public class GameController : MonoBehaviour {
         StartCoroutine(m_EnemySpawn.DestroyChilds());
     }
 
-    public void OnPlay()
+    private void OnPlay()
     {
+       
         m_Ui.gameObject.SetActive(true);
         m_Playing = true;
         m_MainMenu.SetActive(false);
