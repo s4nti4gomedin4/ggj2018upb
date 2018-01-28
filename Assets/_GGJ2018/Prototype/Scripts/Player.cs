@@ -41,6 +41,7 @@ public class Player : MonoBehaviour {
 
         var scale = transform.localScale;
         scale.x = 1+(m_hitBox.m_Level * sizeOverLevel);
+        scale.y = 1 +(m_hitBox.m_Level * sizeOverLevel);
         scale.z = 1+(m_hitBox.m_Level * sizeOverLevel);
         if(scale.x<0.1f){
             scale.x = 0.1f; 
@@ -48,6 +49,10 @@ public class Player : MonoBehaviour {
         if (scale.y < 0.1f)
         {
             scale.y = 0.1f;
+        }
+        if (scale.z < 0.1f)
+        {
+            scale.z = 0.1f;
         }
         transform.localScale = scale;
 

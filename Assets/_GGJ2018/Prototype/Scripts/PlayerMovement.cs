@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour {
     public float tilt;
     private Rigidbody m_rb;
     public HitBox m_Hitbox;
+    public Transform m_player;
 	// Use this for initialization
 	void Start () {
         m_rb = GetComponent<Rigidbody>();
@@ -32,5 +33,6 @@ public class PlayerMovement : MonoBehaviour {
         //m_rb.velocity = movement * speed;
         //m_rb.velocity = Vector3.zero;
         m_rb.transform.position = m_rb.transform.position + (movement*speed);
+        m_player.rotation = Quaternion.LookRotation(movement);
     }
 }
