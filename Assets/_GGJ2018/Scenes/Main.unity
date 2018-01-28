@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465934, g: 0.49642956, b: 0.57482487, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1293,15 +1293,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 764821285}
-<<<<<<< HEAD
-<<<<<<< HEAD
-  m_LocalRotation: {x: -0.000000029393334, y: 9.379819e-14, z: -1, w: -0.000000032258995}
-=======
-  m_LocalRotation: {x: -0.000000029394414, y: 4.362887e-13, z: -1, w: -0.000000032264467}
->>>>>>> added level
-=======
   m_LocalRotation: {x: -0.000000029396688, y: 2.2706075e-10, z: -1, w: -0.000000032275693}
->>>>>>> adding enemy mesh
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2427,15 +2419,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1425129117}
-<<<<<<< HEAD
-<<<<<<< HEAD
-  m_LocalRotation: {x: -0.0000002226235, y: 0.404523, z: -0.91452783, w: -0.0000005134198}
-=======
-  m_LocalRotation: {x: 0.00000045758622, y: -0.404523, z: 0.91452783, w: 0.0000010446213}
->>>>>>> added level
-=======
   m_LocalRotation: {x: -0.00001003952, y: 0.404523, z: -0.91452783, w: -0.000022707029}
->>>>>>> adding enemy mesh
   m_LocalPosition: {x: -2.933, y: 15.041, z: -13.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4547,18 +4531,11 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: -0.31
       objectReference: {fileID: 0}
-<<<<<<< HEAD
-    - target: {fileID: 1276909481526160, guid: 195df693e533e4df1bcd972f19fdf7ea, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-=======
     - target: {fileID: 114032971768445114, guid: 195df693e533e4df1bcd972f19fdf7ea,
         type: 2}
       propertyPath: m_TextLeve
       value: 
       objectReference: {fileID: 864763353}
->>>>>>> added level
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 195df693e533e4df1bcd972f19fdf7ea, type: 2}
   m_IsPrefabParent: 0
