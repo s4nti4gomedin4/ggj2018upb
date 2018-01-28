@@ -10,9 +10,11 @@ public class AimTransmit : MonoBehaviour {
 	private float lastPosX =  0;
 	private float lastPosY =  0;
 
-	private Vector3 mousePositionOnAim;
-	private const float maxRange=4f;
-	private const float minRange=-1*maxRange;
+	private float maxRange{
+		get{
+			return CalculateMaxRange();
+		}
+	}
 	private const float initialZ=0.13f;
 
 	public bool isActive;
@@ -20,7 +22,6 @@ public class AimTransmit : MonoBehaviour {
 	void Start () {
 		DrawAimZone (isActive);
 	}
-
 
 	void OnDisable (){
 		isActive = false;
@@ -42,6 +43,7 @@ public class AimTransmit : MonoBehaviour {
 			if (deltaMouseX != 0 || deltaMouseY!=0) {
 				m_AimReticle.transform.position = m_AimReticle.transform.position + new Vector3 (deltaMouseX,0,deltaMouseY);
 			}
+			print (maxRange);
 			var distance = m_AimReticle.transform.position - transform.position;
 			if (distance.magnitude > maxRange) {
 				distance=distance.normalized*maxRange;
@@ -49,16 +51,14 @@ public class AimTransmit : MonoBehaviour {
 			}
 		}
 	}
-		
 	private float GetMovementValue(float value){
-
 		var direction = Mathf.Sign(value);
 		return m_ReticleSpeed*direction*Time.deltaTime;
-			
 	}
 	private void DrawAimZone(bool activate){
 		m_AimZone.SetActive (activate);
 	}
-
-
+	private float CalculateMaxRange(){
+		return m_AimZone.transform.lossyScale.x / 2;
+	}
 }
