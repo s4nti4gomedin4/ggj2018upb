@@ -26,7 +26,6 @@ public class Transmit : MonoBehaviour {
         Player.onPlayerLevelChange += OnPlayerLevelChangeHandler;
 
 	}
-    // 4
 
     private void OnPlayerLevelChangeHandler(int playerLevel)
     {
@@ -77,7 +76,6 @@ public class Transmit : MonoBehaviour {
                 TransmitPlayer();
             }
                     
-
 		}
 	}
 
@@ -86,7 +84,6 @@ public class Transmit : MonoBehaviour {
 		playerObject.transform.position = this.transform.position;
         playerObject.m_hitBox.m_Level = MaxLevel;
 		this.gameObject.SetActive (false);
-
 	}
 
 	private void OnLevelChange()

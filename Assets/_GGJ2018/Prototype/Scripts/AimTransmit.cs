@@ -56,6 +56,7 @@ public class AimTransmit : MonoBehaviour {
 	}
 	private void DrawAimZone(bool activate){
 		m_AimZone.SetActive (activate);
+		Cursor.visible = !activate;
 	}
 	private float CalculateMaxRange(){
 		return m_AimZone.transform.lossyScale.x / 2;
