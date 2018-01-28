@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Infectable : MonoBehaviour {
     
@@ -12,11 +13,13 @@ public class Infectable : MonoBehaviour {
 
     public float m_TimetoInfected=1;
 
-    public MeshRenderer m_Mesh;
+	public SkinnedMeshRenderer m_Mesh;
     public Material m_InfectedMaterial;
     public Material m_NormalMaterial;
     public Material m_FeedMaterial;
     private int m_LastPlayerLevel;
+
+	public NavMeshAgent navAgent;
 
     [SerializeField]
     private float m_TimeEating;
@@ -57,6 +60,7 @@ public class Infectable : MonoBehaviour {
 		
 	}
     public void ResetInfectable(){
+		navAgent.enabled = true;
         m_hitBox.m_Level = startLevel;
         LoadMaterial();
 
@@ -104,10 +108,12 @@ public class Infectable : MonoBehaviour {
 
    
     public IEnumerator OnInfetcted(){
-        yield return null;
-        transform.localScale = new Vector3(0.1f, 0.5f, 0.1f);
-        yield return new WaitForSeconds(m_TimetoInfected);
+		navAgent.enabled = false;
+
+        //transform.localScale = new Vector3(0.1f, 1f, 0.1f);
+        //yield return new WaitForSeconds(m_TimetoInfected);
         m_hitBox.isInfected = !m_hitBox.isInfected;
+		yield return new WaitForSeconds(m_TimetoInfected);
         ResetInfectable();
     }
 }

@@ -99,6 +99,7 @@ public class EnemyManager : MonoBehaviour {
 		if (actualEnemyType == enemyType.melee || actualEnemyType == enemyType.range) {
 			if (m_ActualEnemyAction == enemyAction.stand) {
 				//nothing or something
+				if(navAgent.isActiveAndEnabled)
 				navAgent.SetDestination(m_TargetPosition);
 			} else if (m_ActualEnemyAction == enemyAction.patrol) {
 				//patrol
@@ -107,13 +108,16 @@ public class EnemyManager : MonoBehaviour {
 				// follow target
                 DetectedTarget();
 				CancelInvoke("WaitForPatrol");
+				if(navAgent.isActiveAndEnabled)
 				navAgent.SetDestination(m_TargetPosition);
 			}else if(m_ActualEnemyAction == enemyAction.targetLost){
                 // target Lost
                 MissingTarget();
 				//Invoke("MissingTarget",1);
 				CancelInvoke("WaitForPatrol");
-				navAgent.SetDestination(m_TargetPosition);
+				if (navAgent.isActiveAndEnabled) {
+					navAgent.SetDestination (m_TargetPosition);
+				}
 				Invoke ("WaitForPatrol", 4);
 			}else if (m_ActualEnemyAction == enemyAction.attack) {
                 // attack target
@@ -164,6 +168,7 @@ public class EnemyManager : MonoBehaviour {
 		int r = Random.Range(0,patrolPos.Length);
 		actualPatrolPos = patrolPos [r].position;
 		if (lastPatrolPos != actualPatrolPos) {
+			if(navAgent.isActiveAndEnabled)
 			navAgent.SetDestination (actualPatrolPos);
 		} else {
 			Invoke ("Patroling", 0);

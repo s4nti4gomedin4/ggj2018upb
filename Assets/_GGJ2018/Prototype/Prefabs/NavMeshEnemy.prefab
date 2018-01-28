@@ -150,6 +150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4260341798402076}
   - component: {fileID: 195707753792196670}
+  - component: {fileID: 114263038978460760}
   m_Layer: 8
   m_Name: NavMeshEnemy
   m_TagString: Untagged
@@ -840,6 +841,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mHitBox: {fileID: 114599792945805516}
+--- !u!114 &114263038978460760
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1537093083263372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 093c8a4be70644647939d454da1a3606, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hit: {fileID: 114599792945805516}
+  anim: {fileID: 95215129562380336}
 --- !u!114 &114301109371196352
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -866,11 +880,12 @@ MonoBehaviour:
   sizeOverLevel: 0.1
   startLevel: 2
   m_hitBox: {fileID: 114599792945805516}
-  m_TimetoInfected: 1
-  m_Mesh: {fileID: 23236872103793128}
+  m_TimetoInfected: 3
+  m_Mesh: {fileID: 137218561836469570}
   m_InfectedMaterial: {fileID: 2100000, guid: 0af676fd3ccad4d919bfcc4eaf36b61e, type: 2}
-  m_NormalMaterial: {fileID: 2100000, guid: fd12474f9aa304d2a890f7e807f55390, type: 2}
+  m_NormalMaterial: {fileID: 2100000, guid: 3e414f3a3db243641b725f94451acb1e, type: 2}
   m_FeedMaterial: {fileID: 2100000, guid: bd02155733bbb4bbdb41d18f873f36c2, type: 2}
+  navAgent: {fileID: 195707753792196670}
   m_TimeEating: 0
   m_timeToEat: 1
 --- !u!114 &114599792945805516
