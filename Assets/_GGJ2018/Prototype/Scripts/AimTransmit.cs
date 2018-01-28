@@ -15,7 +15,6 @@ public class AimTransmit : MonoBehaviour {
 			return CalculateMaxRange();
 		}
 	}
-	private const float initialZ=0.13f;
 
 	public bool isActive;
 	// Use this for initialization
@@ -37,7 +36,6 @@ public class AimTransmit : MonoBehaviour {
 			
 			var moveX = Input.GetAxis ("Move X");
 			var moveY = Input.GetAxis ("Move Y");
-
 			var deltaMouseX = moveX - lastPosX;
 			var deltaMouseY = moveY - lastPosY;
 			if (deltaMouseX != 0f || deltaMouseY!=0f) {
