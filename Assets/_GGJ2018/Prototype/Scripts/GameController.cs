@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour {
     public Player m_PlayerPrefab;
     public GameObject m_Ui;
 
-    private bool m_Playing;
+	public static bool m_Playing;
     private bool m_MenuStart;
 
     private void OnEnable()

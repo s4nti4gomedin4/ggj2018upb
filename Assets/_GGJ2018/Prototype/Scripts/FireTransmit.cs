@@ -5,7 +5,9 @@ using UnityEngine;
 public class FireTransmit : MonoBehaviour {
 
 
-	private bool isPositionValid=true;
+	private bool isOutSide=true;
+	private bool isInSide=false;
+
 	public bool isTransmiting;
 	public GameObject playerTransmit;
 	// Use this for initialization
@@ -16,35 +18,24 @@ public class FireTransmit : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		print (IsPositionValid ());
+		if (!GameController.m_Playing)
+			return;
 		isTransmiting = playerTransmit.activeInHierarchy;
 		if (isTransmiting)
 			return;
 		var fire = Input.GetAxis ("Fire1");
 		if (fire==1) {
 			isTransmiting = !isTransmiting;
-
-
-			if (isPositionValid) {
+			if (IsPositionValid()) {
 				playerTransmit.transform.position=this.transform.position;
-				playerTransmit.SetActive (true);
-				
+				playerTransmit.SetActive (true);	
 			}
-
 		}
 	}
-	void OnTriggerStay(Collider other)
-	{
-		print("Stay");
 
-	}
-
-	void OnTriggerEnter(Collider target) {
-		print("NOPE");
-	}
-
-	void OnTriggerExit(Collider other)
-	{
-		print ("YEP");
+	private bool IsPositionValid(){
+		return !Physics.Raycast (new Vector3(this.transform.position.x,400,this.transform.position.z),this.transform.position);
 	}
 
 }

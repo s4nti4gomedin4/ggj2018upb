@@ -14,7 +14,6 @@ public class Transmit : MonoBehaviour {
    
 
 	void OnEnable(){
-		playerObject.GetComponent<AimTransmit> ().m_AimZone.SetActive(false);
         MaxLevel = playerObject.m_hitBox.m_Level;
         m_Level = Player.MinPlayerLevel;
 		time = 0;
