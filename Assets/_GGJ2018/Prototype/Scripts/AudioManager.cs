@@ -12,7 +12,8 @@ public class AudioManager : MonoBehaviour {
 	public AudioSource m_enemyMoveSound;
 	public AudioSource m_enemyGrowSound;
 	public AudioSource m_enemyDeathSound;
-	public AudioSource m_towerLaser;
+    public AudioSource m_towerLaser;
+	public AudioSource m_Music;
 
     public HitBox m_Hitbox;
 
@@ -39,6 +40,7 @@ public class AudioManager : MonoBehaviour {
     void Start () {
         m_Hitbox.onLevelUp += OnEating;
 	}
+
     private void OnLevelUpPlayer()
     {
         EnemyGrowSoundPlay(false, false);
@@ -63,8 +65,13 @@ public class AudioManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		
+        if(GameController.m_Playing){
+            PlayBackgourndMusic();
+        }
 	}
+    void PlayBackgourndMusic(){
+        PlaySound(m_Music,true,false);
+    }
     void OnPlayermoveHandler(){
         PlayerMoveSoundPlay(false,false);
     }
