@@ -11,8 +11,6 @@ public class Impact : MonoBehaviour {
 
     private void OnTriggerStay(Collider other)
     {
-
-
         if (other.gameObject.CompareTag("hitbox"))
         {
             var otherHitBox = other.gameObject.GetComponent<HitBox>();

@@ -8,13 +8,13 @@ public class Player : MonoBehaviour {
 
     public static Action<int> onPlayerLevelChange;
     public static Action onPlayerDead;
+    public static Action onPlayerStart;
 
     public int startLevel;
     public Text m_TextLeve;
     public HitBox m_hitBox;
   
     public const int MinPlayerLevel = 2;
-    private int _m_Level = 1;
     public float sizeOverLevel;
 
 	
@@ -23,6 +23,9 @@ public class Player : MonoBehaviour {
         m_hitBox.onLevelChange -= OnLevelChange;
         m_hitBox.onLevelChange += OnLevelChange;
         m_hitBox.m_Level = startLevel;
+        if(onPlayerStart!=null){
+            onPlayerStart();
+        }
 	}
 	
     private void OnLevelChange()
