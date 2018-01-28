@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class NextIntro : MonoBehaviour {
 
+    public  System.Action onIntroEnd;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -21,7 +23,9 @@ public class NextIntro : MonoBehaviour {
 		} else if (MainMenu.instance.actualSlide == MainMenu.IntroSlides.intro2) {
 			MainMenu.instance.actualSlide = MainMenu.IntroSlides.intro3;
 		} else if (MainMenu.instance.actualSlide == MainMenu.IntroSlides.intro3) {
-			SceneManager.LoadScene ("Main");
+            if(onIntroEnd!=null){
+                onIntroEnd();
+            }
 		}
 	}
 }

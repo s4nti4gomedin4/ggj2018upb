@@ -15,23 +15,27 @@ public class GameController : MonoBehaviour {
     public Player m_PlayerPrefab;
 
     private bool m_Playing;
+    private bool m_MenuStart;
 
     private void OnEnable()
     {
         Impact.onHitBoxAction += OnHitBoxActionHandler;
         Orgam.onOrgamDestroy += OnOrgamDestroyHandler;
         Player.onPlayerDead += OnPlayerDead;
-        MainMenu.OnGameStart += OnPlay;
+        MainMenu.OnGameStart += OnGameStartHandler;
     }
 
-   
+    private void OnGameStartHandler(){
+        m_MenuStart = true;
+        OnPlay();
+    }
 
     private void OnDisable()
     {
         Impact.onHitBoxAction -= OnHitBoxActionHandler;
         Orgam.onOrgamDestroy -= OnOrgamDestroyHandler;
         Player.onPlayerDead -= OnPlayerDead;
-        MainMenu.OnGameStart -= OnPlay;
+        MainMenu.OnGameStart -= OnGameStartHandler;
 
 
     }
@@ -39,6 +43,7 @@ public class GameController : MonoBehaviour {
     private void Start()
     {
         m_Playing = false;
+        m_MenuStart = false;
 
         m_Splash.SetActive(false);
         m_MainMenu.SetActive(true);
@@ -46,7 +51,7 @@ public class GameController : MonoBehaviour {
 
     private void Update()
     {
-        if(Input.anyKeyDown && !m_Playing){
+        if(Input.anyKeyDown && !m_Playing && m_MenuStart){
             OnPlay();
         }
     }
@@ -55,6 +60,7 @@ public class GameController : MonoBehaviour {
     {
         m_Playing = false;
         m_Splash.SetActive(true);
+        m_PlayerPrefab.gameObject.SetActive(false);
         m_Message.text = "Win!!";
         m_EnemySpawn.DestroyChilds();
         StartCoroutine(m_EnemySpawn.DestroyChilds());
@@ -63,7 +69,7 @@ public class GameController : MonoBehaviour {
     private void OnPlayerDead()
     {
         m_Playing = false;
-
+        m_PlayerPrefab.gameObject.SetActive(false);
         m_Splash.SetActive(true);
         m_Message.text = "Lose!!";
         StartCoroutine(m_EnemySpawn.DestroyChilds());

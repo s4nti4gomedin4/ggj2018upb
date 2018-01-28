@@ -40,10 +40,9 @@ public class AimTransmit : MonoBehaviour {
 
 			var deltaMouseX = moveX - lastPosX;
 			var deltaMouseY = moveY - lastPosY;
-			if (deltaMouseX != 0 || deltaMouseY!=0) {
+			if (deltaMouseX != 0f || deltaMouseY!=0f) {
 				m_AimReticle.transform.position = m_AimReticle.transform.position + new Vector3 (deltaMouseX,0,deltaMouseY);
 			}
-			print (maxRange);
 			var distance = m_AimReticle.transform.position - transform.position;
 			if (distance.magnitude > maxRange) {
 				distance=distance.normalized*maxRange;

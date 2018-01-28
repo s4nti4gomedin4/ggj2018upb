@@ -10,7 +10,6 @@ public class Orgam : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
 
-        print("OnTriggerEnter");
         if(other.CompareTag("hitbox")){
             var m_otherHitbox = other.GetComponent<HitBox>();
             if(m_otherHitbox!=null && m_otherHitbox.isInfected){

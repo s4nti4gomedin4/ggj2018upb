@@ -11,8 +11,7 @@ public class Transmit : MonoBehaviour {
 	private float time;
 	public float sizeOverLevel;
     private int m_Level;
-
-
+   
 
 	// Use this for initialization
 	void Start () {
@@ -31,14 +30,14 @@ public class Transmit : MonoBehaviour {
 
     private void OnPlayerLevelChangeHandler(int playerLevel)
     {
-        if( playerLevel == Player.MinPlayerLevel){
-            TransmitPlayer();
-            return;
-        }
+       
         int maxLevelTEp = playerLevel + m_Level;
         int diffMAxLevel = maxLevelTEp-MaxLevel ;
         MaxLevel += diffMAxLevel;
 
+        if(MaxLevel<Player.MinPlayerLevel){
+            MaxLevel = Player.MinPlayerLevel;
+        }
 
     }
 
@@ -67,8 +66,13 @@ public class Transmit : MonoBehaviour {
                 return;
                 
             }
-
-             playerObject.m_hitBox.m_Level--;
+            if (playerObject.m_hitBox.m_Level > Player.MinPlayerLevel + 1)
+            {
+                playerObject.m_hitBox.m_Level--;
+            }else{
+                TransmitPlayer();
+                return;
+            }
             if (m_Level == MaxLevel){
                 TransmitPlayer();
             }
@@ -82,7 +86,6 @@ public class Transmit : MonoBehaviour {
 		playerObject.transform.position = this.transform.position;
         playerObject.m_hitBox.m_Level = MaxLevel;
 		this.gameObject.SetActive (false);
-        print ("player lvl "+playerObject.m_hitBox.m_Level);
 
 	}
 
