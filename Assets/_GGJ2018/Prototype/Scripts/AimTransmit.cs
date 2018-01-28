@@ -19,7 +19,7 @@ public class AimTransmit : MonoBehaviour {
 	public bool isActive;
 	// Use this for initialization
 	void Start () {
-		DrawAimZone (isActive);
+		m_AimReticle.SetActive (true);
 	}
 
 	void OnDisable (){
@@ -27,26 +27,21 @@ public class AimTransmit : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		var transmit=Input.GetButtonDown("Jump");
-		if (transmit) {
-			isActive = !isActive;
-			DrawAimZone (isActive);
+
+	
+		var moveX = Input.GetAxis ("Move X");
+		var moveY = Input.GetAxis ("Move Y");
+		var deltaMouseX = moveX - lastPosX;
+		var deltaMouseY = moveY - lastPosY;
+		if (deltaMouseX != 0f || deltaMouseY!=0f) {
+			m_AimReticle.transform.position = m_AimReticle.transform.position + new Vector3 (deltaMouseX,0,deltaMouseY);
 		}
-		if (isActive) {
-			
-			var moveX = Input.GetAxis ("Move X");
-			var moveY = Input.GetAxis ("Move Y");
-			var deltaMouseX = moveX - lastPosX;
-			var deltaMouseY = moveY - lastPosY;
-			if (deltaMouseX != 0f || deltaMouseY!=0f) {
-				m_AimReticle.transform.position = m_AimReticle.transform.position + new Vector3 (deltaMouseX,0,deltaMouseY);
-			}
-			var distance = m_AimReticle.transform.position - transform.position;
-			if (distance.magnitude > maxRange) {
-				distance=distance.normalized*maxRange;
-				m_AimReticle.transform.position = transform.position + distance;
-			}
+		var distance = m_AimReticle.transform.position - transform.position;
+		if (distance.magnitude > maxRange) {
+			distance=distance.normalized*maxRange;
+			m_AimReticle.transform.position = transform.position + distance;
 		}
+
 	}
 	private float GetMovementValue(float value){
 		var direction = Mathf.Sign(value);

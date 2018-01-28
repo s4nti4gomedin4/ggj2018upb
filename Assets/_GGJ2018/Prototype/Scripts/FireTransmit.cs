@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FireTransmit : MonoBehaviour {
 
+
+	private bool isPositionValid=true;
 	public bool isTransmiting;
 	public GameObject playerTransmit;
 	// Use this for initialization
@@ -20,12 +22,29 @@ public class FireTransmit : MonoBehaviour {
 		var fire = Input.GetAxis ("Fire1");
 		if (fire==1) {
 			isTransmiting = !isTransmiting;
-			playerTransmit.transform.position= this.transform.position;
-			playerTransmit.SetActive (true);
+
+
+			if (isPositionValid) {
+				playerTransmit.transform.position=this.transform.position;
+				playerTransmit.SetActive (true);
+				
+			}
 
 		}
-
-			
+	}
+	void OnTriggerStay(Collider other)
+	{
+		print("Stay");
 
 	}
+
+	void OnTriggerEnter(Collider target) {
+		print("NOPE");
+	}
+
+	void OnTriggerExit(Collider other)
+	{
+		print ("YEP");
+	}
+
 }
