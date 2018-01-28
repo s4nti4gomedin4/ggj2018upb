@@ -18,7 +18,6 @@ public class FireTransmit : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		print (IsPositionValid ());
 		if (!GameController.m_Playing)
 			return;
 		isTransmiting = playerTransmit.activeInHierarchy;

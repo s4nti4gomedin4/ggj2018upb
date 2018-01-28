@@ -8,6 +8,7 @@ TagManager:
   - PatrolPos
   - hitbox
   - impact
+  - wall
   layers:
   - Default
   - TransparentFX

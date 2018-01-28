@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CamTransparentObstacles : MonoBehaviour {
-	public MeshRenderer m_mesh;
+    public MeshRenderer m_mesh;
+	
 	public Material m_base;
 	public Material m_transparent;
 	// Use this for initialization
@@ -15,13 +16,19 @@ public class CamTransparentObstacles : MonoBehaviour {
 	void Update () {
 		RaycastHit hit;
 		if (Physics.Raycast (transform.position, transform.forward, out hit)) {
-			if (hit.collider.gameObject.name == "Enclosure01")
+            SetMaterial(m_base);
+            m_mesh.material = m_base;
+            if (hit.collider.gameObject.CompareTag("wall"))
 			{
-				m_mesh.material = m_transparent;
-			} else {
-				m_mesh.material = m_base;
-			}
+                m_mesh = hit.collider.gameObject.GetComponent<MeshRenderer>();
+                SetMaterial(m_transparent);
+			} 
 		}
 		
 	}
+    private void SetMaterial(Material newMaterial){
+        if(m_mesh!=null){
+            m_mesh.material = newMaterial;
+        }
+    }
 }
