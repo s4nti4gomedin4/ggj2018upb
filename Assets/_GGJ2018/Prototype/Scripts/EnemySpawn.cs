@@ -80,10 +80,12 @@ public class EnemySpawn : MonoBehaviour {
         StartCoroutine(CreateNewFeed());
     }
     public IEnumerator CreateNewFeed(){
+        print("CreateNewFeed");
         yield return null;
         var newFeed = Instantiate(m_FeedPrefab);
         newFeed.transform.SetParent(m_EnemyPanelSpawn);
         newFeed.gameObject.SetActive(true);
+        newFeed.onFeedDestroy += OnFeedDestroy;
         var newPosition = m_PositionSpawn[Random.Range(0, m_PositionSpawn.Length)].position;
         newPosition.y = m_FeedPrefab.transform.position.y;
         var PositionAnemy = m_PositionSpawn[Random.Range(0, m_PositionSpawn.Length)].position;

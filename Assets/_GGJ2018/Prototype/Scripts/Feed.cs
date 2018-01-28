@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class Feed : MonoBehaviour {
 
+    public System.Action onFeedDestroy;
+
     public HitBox m_HitBox;
     public Transform m_FollowEnemy;
     public NavMeshAgent m_Agent;
@@ -27,6 +29,9 @@ public class Feed : MonoBehaviour {
                 if (gameObject != null)
                 {
                     Destroy(gameObject, 0.01f);
+                    if(onFeedDestroy!=null){
+                        onFeedDestroy();
+                    }
                 }
             }
         }
