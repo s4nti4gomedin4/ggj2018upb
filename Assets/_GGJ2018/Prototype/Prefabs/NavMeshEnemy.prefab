@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33559072472748358}
   - component: {fileID: 23007020676307476}
   - component: {fileID: 122229206252745654}
+  - component: {fileID: 108649018987625754}
   m_Layer: 0
   m_Name: glow
   m_TagString: Untagged
@@ -158,7 +159,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1659353488269928
 GameObject:
   m_ObjectHideFlags: 1
@@ -398,13 +399,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1013467831432734}
-  m_LocalRotation: {x: -0, y: 0.70710677, z: -0, w: 0.7071069}
-  m_LocalPosition: {x: 4.0479155, y: 81.20004, z: 0}
+  m_LocalRotation: {x: -0.40494043, y: 0.57967466, z: 0.4049399, w: 0.57967603}
+  m_LocalPosition: {x: 4.0479155, y: 81.20007, z: 0}
   m_LocalScale: {x: 4.2476296, y: 1000.0006, z: 17.049892}
   m_Children: []
   m_Father: {fileID: 4074721996913836}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -69.874, y: 90.00001, z: 0}
 --- !u!4 &4389994310263408
 Transform:
   m_ObjectHideFlags: 1
@@ -913,6 +914,42 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
+--- !u!108 &108649018987625754
+Light:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1013467831432734}
+  m_Enabled: 1
+  serializedVersion: 8
+  m_Type: 0
+  m_Color: {r: 0.35294116, g: 0.70547676, b: 1, a: 1}
+  m_Intensity: 30
+  m_Range: 4.871154
+  m_SpotAngle: 68.92198
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!114 &114239129305562566
 MonoBehaviour:
   m_ObjectHideFlags: 1
