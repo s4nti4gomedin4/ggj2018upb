@@ -20,8 +20,15 @@ public class Feed : MonoBehaviour {
 	
 	
     void OnLevelChange(){
-        if(m_HitBox.m_Level<1){
-            Destroy(gameObject,0.01f);
+        if (m_HitBox != null)
+        {
+            if (m_HitBox.m_Level < 1)
+            {
+                if (gameObject != null)
+                {
+                    Destroy(gameObject, 0.01f);
+                }
+            }
         }
     }
 
@@ -30,6 +37,10 @@ public class Feed : MonoBehaviour {
             while (true)
             {
                 yield return new WaitForSeconds(TimeToFollow);
+                if(this==null){
+                    yield break;
+                }
+                if(m_Agent!=null && m_FollowEnemy!=null)
                 m_Agent.SetDestination(m_FollowEnemy.position);
             }
         }

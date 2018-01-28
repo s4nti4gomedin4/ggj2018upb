@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,12 +13,14 @@ public class EnemySpawn : MonoBehaviour {
 
     public Feed m_FeedPrefab;
 
-    public List<Infectable> m_Fectables = new List<Infectable>();
+    public List<Infectable> m_Fectables;
    
     public Vector2 offset;
 
 	// Use this for initialization
-    IEnumerator Start () {
+    IEnumerator StartSpawn () {
+        m_Fectables = new List<Infectable>();
+        yield return DestroyChilds();
         if(m_PositionSpawn!=null){
             for (int i = 0; i < enemyCount; i++)
             {
@@ -43,6 +46,25 @@ public class EnemySpawn : MonoBehaviour {
             yield return CreateNewFeed();
         }
     }
+
+    public IEnumerator DestroyChilds()
+    {
+        if (m_EnemyPanelSpawn != null)
+        {
+            for (int i = 0; i < m_EnemyPanelSpawn.childCount; i++)
+            {
+                Destroy(m_EnemyPanelSpawn.GetChild(i).gameObject, 0.01f);
+                yield return null;
+            }
+        }
+    }
+        
+
+    public void OnSpawnEnemies()
+    {
+        StartCoroutine(StartSpawn());
+    }
+
 
     private EnemyManager SpawnEnemy(GameObject enemyPrefab, Vector3 newPosition)
     {

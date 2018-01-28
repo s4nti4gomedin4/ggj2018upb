@@ -5,12 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 	public GameObject[] intros;
+    public static System.Action OnGameStart;
 	public enum IntroSlides
 	{
 		mainMenu,
 		intro1,
 		intro2,
-		intro3
+		intro3,
+        end
 	};
 
 	public IntroSlides actualSlide;
@@ -23,7 +25,7 @@ public class MainMenu : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 
 		intros [0].SetActive (actualSlide == IntroSlides.mainMenu ? true: false);
 		intros [1].SetActive (actualSlide == IntroSlides.intro1 ? true: false);
@@ -37,7 +39,10 @@ public class MainMenu : MonoBehaviour {
 				actualSlide = IntroSlides.intro3;
 			}else if(actualSlide == IntroSlides.intro3)
 			{
-				SceneManager.LoadScene ("Main");
+                actualSlide = IntroSlides.end;
+                if(OnGameStart!=null){
+                    OnGameStart();
+                }
 			}
 		}
 	}

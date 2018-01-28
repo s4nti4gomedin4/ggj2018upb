@@ -8,33 +8,30 @@ public class Player : MonoBehaviour {
 
     public static Action<int> onPlayerLevelChange;
     public static Action onPlayerDead;
-    public static Action onPlayerWin;
 
     public int startLevel;
     public Text m_TextLeve;
     public HitBox m_hitBox;
   
+    public const int MinPlayerLevel = 2;
     private int _m_Level = 1;
     public float sizeOverLevel;
 
-	// Use this for initialization
-	void Start () {
+	
+    public void ResetPlayer () {
         m_hitBox.isInfected = true;
+        m_hitBox.onLevelChange -= OnLevelChange;
         m_hitBox.onLevelChange += OnLevelChange;
         m_hitBox.m_Level = startLevel;
 	}
 	
     private void OnLevelChange()
     {
-        if(m_hitBox.m_Level<2){
+        if(m_hitBox.m_Level<MinPlayerLevel){
             Dead();
             return;
         }
-        if (m_hitBox.m_Level > HitBox.MaxLevel-2)
-        {
-            Win();
-            return;
-        }
+
 
         if (m_TextLeve != null)
             m_TextLeve.text = string.Format("{0:D}", m_hitBox.m_Level);
@@ -57,13 +54,6 @@ public class Player : MonoBehaviour {
         }
     }
 
-    private void Win()
-    {
-        if (onPlayerWin != null)
-        {
-            onPlayerWin();
-        }
-    }
 
     private void Dead()
     {
