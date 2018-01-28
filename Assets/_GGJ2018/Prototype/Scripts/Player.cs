@@ -16,18 +16,26 @@ public class Player : MonoBehaviour {
   
     public const int MinPlayerLevel = 2;
     public float sizeOverLevel;
+	public Tips tip;
+
 
 	
     public void ResetPlayer () {
         m_hitBox.isInfected = true;
         m_hitBox.onLevelChange -= OnLevelChange;
         m_hitBox.onLevelChange += OnLevelChange;
+		m_hitBox.onLevelUp -= OnLevelUpChange;
+		m_hitBox.onLevelUp += OnLevelUpChange;
         m_hitBox.m_Level = startLevel;
         if(onPlayerStart!=null){
             onPlayerStart();
         }
 	}
-	
+	private void OnLevelUpChange(){
+		if (m_hitBox.m_Level == HitBox.MaxLevel) {
+			tip.ShowMessage ("Destroy main organ now!");
+		}
+	}
     private void OnLevelChange()
     {
         if(m_hitBox.m_Level<MinPlayerLevel){
@@ -35,7 +43,8 @@ public class Player : MonoBehaviour {
             return;
         }
 
-
+			
+			
         if (m_TextLeve != null)
             m_TextLeve.text = string.Format("Level: {0:D}", m_hitBox.m_Level-1);
 

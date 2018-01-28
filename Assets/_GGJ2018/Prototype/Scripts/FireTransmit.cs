@@ -10,6 +10,8 @@ public class FireTransmit : MonoBehaviour {
 
 	public bool isTransmiting;
 	public GameObject playerTransmit;
+	public GameObject transmitAim;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -21,23 +23,24 @@ public class FireTransmit : MonoBehaviour {
 		if (!GameController.m_Playing)
 			return;
 		isTransmiting = playerTransmit.activeInHierarchy;
+
+		transmitAim.SetActive (!isTransmiting);
 		if (isTransmiting)
 			return;
 		var fire = Input.GetAxis ("Fire1");
 		if (fire==1) {
 			isTransmiting = !isTransmiting;
-			if (IsPositionValid()) {
+
 				playerTransmit.transform.position=this.transform.position;
 				playerTransmit.SetActive (true);	
-			}
+
 		}
 	}
 
 	private bool IsPositionValid(){
 		RaycastHit hit;
-		var  validate=Physics.Raycast (this.transform.position, transform.up, out hit);
-		if(validate)
-		print (hit.collider.gameObject.name);
+		var  validate=Physics.Raycast (this.transform.position, transform.up, 40f);
+
 		return validate ;
 	}
 
