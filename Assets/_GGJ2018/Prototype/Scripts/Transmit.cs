@@ -24,7 +24,7 @@ public class Transmit : MonoBehaviour {
 
 	void OnEnable(){
 		playerObject.GetComponent<AimTransmit> ().m_AimZone.SetActive(false);
-		MaxLevel = playerObject.m_Level;
+        MaxLevel = playerObject.m_hitBox.m_Level;
 		m_Level = 1;
 		time = 0;
 
@@ -43,16 +43,16 @@ public class Transmit : MonoBehaviour {
 
 
 			m_Level++;
-			playerObject.m_Level--;
+            playerObject.m_hitBox.m_Level--;
 			if(m_Level==MaxLevel)
 			TransmitPlayer ();
 		}
 	}
 	private void TransmitPlayer(){
 		playerObject.transform.position = this.transform.position;
-		playerObject.m_Level = MaxLevel;
+        playerObject.m_hitBox.m_Level = MaxLevel;
 		this.gameObject.SetActive (false);
-		print ("player lvl "+playerObject.m_Level);
+        print ("player lvl "+playerObject.m_hitBox.m_Level);
 
 	}
 

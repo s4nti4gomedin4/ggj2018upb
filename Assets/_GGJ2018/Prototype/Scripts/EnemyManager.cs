@@ -57,8 +57,8 @@ public class EnemyManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		lastPatrolPos = transform.position;
-        m_FollowPlayer.onPlayerDetected += OnPlayerDetectedHandler;
-        m_FollowPlayer.onPlayerLost += OnPlayerLostHandler;
+        m_FollowPlayer.onTargetDetected += OnTargetDetectedHandler;
+        m_FollowPlayer.onTargetLost += OnTargeLostHandler;
         m_ActualEnemyAction = enemyAction.patrol;
 	}
     void Update()
@@ -73,7 +73,7 @@ public class EnemyManager : MonoBehaviour {
         }
 
     }
-    private void OnPlayerLostHandler(Vector3 position)
+    private void OnTargeLostHandler(Vector3 position)
     {
         if ( m_ActualEnemyAction == enemyAction.follow)
         {
@@ -83,7 +83,7 @@ public class EnemyManager : MonoBehaviour {
     }
 
 
-    private void OnPlayerDetectedHandler(Vector3 position)
+    private void OnTargetDetectedHandler(Vector3 position)
     {
         if (m_ActualEnemyAction == enemyAction.patrol || m_ActualEnemyAction == enemyAction.follow)
         {

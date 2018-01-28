@@ -4,27 +4,31 @@ using UnityEngine;
 
 public class HitBox : MonoBehaviour {
 
-    public delegate void HitBoxEvent(HitBox winner,HitBox losser);
-    public static event HitBoxEvent onHitBoxAction;
+   
 
-    public int m_Level;
-    public bool isInfected;
+    public System.Action onLevelChange;
+    public const int MaxLevel = 15;
 
-	
-
-    private void OnCollisionStay(Collision collision)
+    private int _m_Level;
+    public int m_Level
     {
-        if(collision.gameObject.CompareTag("hitbox")){
-            var otherHitBox = collision.gameObject.GetComponent<HitBox>();
-            if(otherHitBox!=null){
-                if(otherHitBox.isInfected!=isInfected){
-                    if(otherHitBox.m_Level<m_Level){
-                        if(onHitBoxAction!=null){
-                            onHitBoxAction(this,otherHitBox);
-                        }
-                    }
-                }
+        get { return _m_Level; }
+        set
+        {
+           
+            _m_Level = value;
+            if(_m_Level>MaxLevel){
+                _m_Level = MaxLevel;
             }
+            if(onLevelChange!=null){
+                onLevelChange();
+            }
+           
         }
     }
+    public bool isInfected;
+
+
+
+   
 }

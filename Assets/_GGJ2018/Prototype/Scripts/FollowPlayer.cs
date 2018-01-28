@@ -5,35 +5,25 @@ using UnityEngine;
 public class FollowPlayer : MonoBehaviour {
 
     public delegate void  FollowPlayerEvent(Vector3 position);
-    public event FollowPlayerEvent onPlayerDetected;
-    public event FollowPlayerEvent onPlayerLost;
+    public event FollowPlayerEvent onTargetDetected;
+    public event FollowPlayerEvent onTargetLost;
 
-    public Infectable m_Infectable;
+    public HitBox mHitBox;
 
     public void OnTriggerStay(Collider other)
     {
-        print(other.name);
-        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("enemy"))
+        
+        if (other.gameObject.CompareTag("hitbox") )
         {
-            var m_Player = other.gameObject.GetComponent<Player>();
+            var m_OtherHitbox = other.gameObject.GetComponent<HitBox>();
 
-            if(m_Player!=null ){
-                if(!m_Infectable.isInfected && m_Player.m_Level<m_Infectable.m_Level){
-                    if (onPlayerDetected != null)
+            if(m_OtherHitbox!=null ){
+                if(mHitBox.isInfected != m_OtherHitbox.isInfected){
+                    if (m_OtherHitbox.m_Level < mHitBox.m_Level)
                     {
-                        onPlayerDetected(other.gameObject.transform.position);
-                    }
-                }
-            }else{
-                var m_Enemy = other.gameObject.GetComponent<Infectable>();
-                if(m_Enemy!=null){
-                    if(m_Enemy.isInfected!=m_Infectable.isInfected){
-                        if (m_Enemy.m_Level < m_Infectable.m_Level)
+                        if (onTargetDetected != null)
                         {
-                            if (onPlayerDetected != null)
-                            {
-                                onPlayerDetected(other.gameObject.transform.position);
-                            }
+                            onTargetDetected(m_OtherHitbox.gameObject.transform.position);
                         }
                     }
                 }
@@ -41,38 +31,24 @@ public class FollowPlayer : MonoBehaviour {
             }
         } 
     }
+
     public void OnTriggerExit(Collider other)
     {
-        print(other.name);
-        if (other.gameObject.CompareTag("Player")|| other.gameObject.CompareTag("enemy"))
+        if (other.gameObject.CompareTag("hitbox") )
         {
-           
-            var m_Player = other.gameObject.GetComponent<Player>();
+            var m_OtherHitbox = other.gameObject.GetComponent<HitBox>();
 
-            if (m_Player != null )
-            {
-                if (!m_Infectable.isInfected && m_Player.m_Level < m_Infectable.m_Level)
-                {
-                    if (onPlayerLost != null)
+            if(m_OtherHitbox!=null ){
+                if(mHitBox.isInfected != m_OtherHitbox.isInfected){
+                    if (m_OtherHitbox.m_Level < mHitBox.m_Level)
                     {
-                        onPlayerLost(other.gameObject.transform.position);
-                    }
-                }
-            }else{
-                var m_Enemy = other.gameObject.GetComponent<Infectable>();
-                if (m_Enemy != null)
-                {
-                    if (m_Enemy.isInfected != m_Infectable.isInfected)
-                    {
-                        if (m_Enemy.m_Level < m_Infectable.m_Level)
+                        if (onTargetLost != null)
                         {
-                            if (onPlayerLost != null)
-                            {
-                                onPlayerLost(other.gameObject.transform.position);
-                            }
+                            onTargetLost(m_OtherHitbox.gameObject.transform.position);
                         }
                     }
                 }
+
             }
         } 
     }
