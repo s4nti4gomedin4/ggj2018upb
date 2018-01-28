@@ -260,6 +260,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1097720031689332
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4313237774654216}
+  - component: {fileID: 122593753607938892}
+  m_Layer: 0
+  m_Name: halo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1110611533617890
 GameObject:
   m_ObjectHideFlags: 1
@@ -1890,7 +1906,8 @@ Transform:
   m_LocalRotation: {x: 0.5000001, y: 0.50000006, z: -0.4999999, w: -0.4999999}
   m_LocalPosition: {x: 10.981827, y: 24.177612, z: -4.7204266}
   m_LocalScale: {x: 22.637964, y: 22.637964, z: 22.637964}
-  m_Children: []
+  m_Children:
+  - {fileID: 4313237774654216}
   m_Father: {fileID: 4296684500972330}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2351,6 +2368,19 @@ Transform:
   m_Children:
   - {fileID: 4499718315764568}
   m_Father: {fileID: 4670912759246682}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4313237774654216
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1097720031689332}
+  m_LocalRotation: {x: -0.45451948, y: -0.5416752, z: -0.5416753, w: -0.45451945}
+  m_LocalPosition: {x: 1.78, y: -1.03, z: 1.51}
+  m_LocalScale: {x: 44.17359, y: 44.173584, z: 44.17359}
+  m_Children: []
+  m_Father: {fileID: 4067134488002778}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4313914032237380
@@ -4227,6 +4257,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_HitBox: {fileID: 114514973117696606}
+--- !u!122 &122593753607938892
+Halo:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1097720031689332}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4278255464
+  m_Size: 0.36
 --- !u!135 &135898489395504948
 SphereCollider:
   m_ObjectHideFlags: 1
